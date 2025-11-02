@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    // target: Kompilacja do nowoczesnego standardu JavaScript (ES2020).
+    "target": "es2020",
+
+    // lib: Biblioteki dostępne globalnie (ES2020 dla nowych funkcji, DOM dla przeglądarki/Cypress).
+    "lib": ["es2020", "dom"],
+
+    // types: Definiuje pakiety typów do załadowania, co daje IntelliSense dla Cypress i Node.js.
+    "types": ["cypress", "node"],
+
+    // strict: Włącza rygorystyczne sprawdzanie typów (zalecane dla jakości kodu).
+    "strict": true,
+
+    // esModuleInterop: Umożliwia wygodne importy CommonJS (np. JSON) jako moduły ES.
+    "esModuleInterop": true,
+
+    // resolveJsonModule: Pozwala na bezpośrednie importowanie plików .json w kodzie TS.
+    "resolveJsonModule": true,
+
+    // module: Ustawienie modułów na CommonJS, standard dla Cypress.
+    "module": "commonjs",
+
+    // skipLibCheck: Pomija sprawdzanie typów w plikach bibliotek (przyspiesza kompilację).
+    "skipLibCheck": true
+  },
+
+  // include: Wskazuje, które pliki mają być uwzględnione w procesie kompilacji TypeScript.
+  "include": ["**/*.ts", "**/*.d.ts"]
+}

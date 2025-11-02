@@ -1,0 +1,58 @@
+{
+  "name": "cypress-api-testing-ts-example",
+  "version": "1.0.0",
+  "description": "Przykład testów API w Cypress z TypeScript",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    
+    "cypress:ci": "cypress run",
+    "test": "npm run cypress:run",
+    
+    "pretest:ci": "rm -rf cypress/results/junit cypress/results/html && mkdir -p cypress/results/html && rm -rf index.html",
+    "report:merge": "jrm cypress/results/junit/merged.xml \"cypress/results/junit/*.xml\"",
+    
+    "report:html": "npx xunit-viewer --results=cypress/results/junit/merged.xml",
+    "test:ci": "npm run cypress:ci && npm run report:merge && npm run report:html",
+    
+    "ts:check": "tsc --noEmit",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "lint:check": "eslint cypress --ext .ts",
+    "lint:fix": "eslint cypress --ext .ts --fix",
+    
+    "prepare": "husky install",
+    "precommit": "lint-staged",
+    "clean": "cypress cache clear"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "cypress": "^15.5.0",
+    "cypress-plugin-api": "^2.11.2",
+    "ts-node": "^10.0.0",
+    "typescript": "^5.0.0",
+    
+    "prettier": "^3.0.0",
+    "eslint": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
+    "eslint-plugin-cypress": "^5.2.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    
+    "mocha-junit-reporter": "^2.2.1",
+    "junit-report-merger": "^4.0.0",
+    "xunit-viewer": "^10.0.0" 
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
+  }
+}

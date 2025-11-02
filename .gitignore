@@ -1,0 +1,83 @@
+# ---------------------------------------------------------------------- #
+# Node.js / TypeScript
+# ---------------------------------------------------------------------- #
+
+# Zależności
+/node_modules
+/npm-debug.log*
+/yarn-error.log
+/yarn.lock # Opcjonalnie: skomentuj, jeśli używasz Yarn jako głównego menedżera
+/package-lock.json # Opcjonalnie: skomentuj, jeśli używasz npm jako głównego menedżera
+/pnpm-lock.yaml
+
+# Pliki tymczasowe generowane przez TypeScript
+/dist
+/build
+/tmp
+
+# ---------------------------------------------------------------------- #
+# Cypress Automation Framework
+# ---------------------------------------------------------------------- #
+
+# Pliki generowane automatycznie podczas uruchamiania testów
+
+# Filmy z przebiegów testów (duże pliki, nie powinny być w repozytorium)
+/cypress/videos
+
+# Zrzuty ekranu wykonane w przypadku niepowodzenia testów
+/cypress/screenshots
+
+# Wyniki testów (raporty JUnit, HTML, JSON itp. z merge-raporters)
+/cypress/results
+/mochawesome-report
+
+# Cache Cypress
+/.cypress-cache
+
+# Pliki konfiguracyjne specyficzne dla lokalnego środowiska Cypress
+/cypress.env.json
+
+# ---------------------------------------------------------------------- #
+# Zmienne Środowiskowe
+# ---------------------------------------------------------------------- #
+
+# Pliki z wrażliwymi danymi i lokalną konfiguracją
+/.env
+/.env.local
+/.env.*.local
+/config.local.ts
+
+# ---------------------------------------------------------------------- #
+# Pliki IDE i Edytorów Kodu
+# ---------------------------------------------------------------------- #
+
+# Visual Studio Code
+/.vscode/*
+!/.vscode/settings.json # Zostaw, jeśli są współdzielone ustawienia
+!/.vscode/extensions.json # Zostaw, jeśli są zalecane rozszerzenia
+!/.vscode/launch.json # Zostaw, jeśli są współdzielone konfiguracje uruchamiania
+!/.vscode/tasks.json # Zostaw, jeśli są współdzielone zadania
+
+# IntelliJ / WebStorm / Reszta JetBrains
+/.idea/
+
+# Sublime Text
+/*.sublime-workspace
+/*.sublime-project
+
+# Vim/NeoVim
+/*~
+
+# ---------------------------------------------------------------------- #
+# Pliki Systemowe (OS)
+# ---------------------------------------------------------------------- #
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+index.html

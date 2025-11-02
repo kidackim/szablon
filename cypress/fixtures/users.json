@@ -1,0 +1,11 @@
+{
+  "validUser": {
+    "id": 1,
+    "username": "JanKowalski",
+    "email": "jan.kowalski@example.com"
+  },
+  "invalidUser": {
+    "id": 9999,
+    "username": "NieIstnieje"
+  }
+}

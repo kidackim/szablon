@@ -1,0 +1,11 @@
+{
+  "validPost": {
+    "title": "Cypress TS Post",
+    "body": "To jest body testowego posta.",
+    "userId": 1
+  },
+  "invalidPost": {
+    "title": "Brak body",
+    "userId": 1
+  }
+}

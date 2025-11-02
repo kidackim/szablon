@@ -1,0 +1,107 @@
+# 🚀 Szablon Automatyzacji Testów (E2E & API) – Cypress + TypeScript
+#### Wprowadzenie
+
+- Ten projekt stanowi ustandaryzowany szablon (boilerplate) dla zestawów testów automatycznych End-to-End (E2E) oraz API, oparty na frameworku Cypress i języku TypeScript. Jego celem jest zapewnienie jednolitej, skalowalnej i łatwej w utrzymaniu bazy testowej dla wszystkich nowych projektów w firmie.
+
+- Szablon promuje najlepsze praktyki w zakresie testowania, takie jak separacja logiki testów (Page Object Pattern / API Object Pattern), wykorzystanie silnego typowania oraz zintegrowane raportowanie.
+
+##### 🛠️ Technologie
+
+- Cypress Główny framework do testów E2E i API.
+- TypeScript Język programowania zapewniający bezpieczeństwo i czytelność kodu.
+- Node.js LTS (np. v20+) Środowisko uruchomieniowe.
+- npm/yarn Menedżer pakietów.
+- ESLint Narzędzie do statycznej analizy kodu i utrzymania jednolitości stylu.
+
+##### ⚙️ Wymagania i Instalacja
+- Upewnij się, że masz zainstalowane środowisko Node.js w wersji LTS (zalecana) oraz menedżer pakietów npm lub Yarn.
+- Sklonuj repozytorium, a następnie zainstaluj wszystkie wymagane pakiety:
+
+```sh
+# Klonowanie repozytorium
+git clone <URL_REPOZYTORIUM>
+cd <NAZWA_PROJEKTU>
+
+# Instalacja zależności
+npm install
+# lub
+yarn install
+```
+
+##### 📂 Struktura Projektu (Konwencje)
+Projekt jest zorganizowany zgodnie z najlepszymi praktykami Cypress, z dodatkowym naciskiem na architekturę testów:
+- **cypress/e2e/**
+-- Główny katalog na pliki testowe. Pliki powinny mieć rozszerzenie *.spec.ts.	Logika testów powinna być minimalna, koncentrując się na scenariuszach.
+- **cypress/support/**
+-- Katalog wspierający. Zawiera globalne ustawienia, własne komendy i pliki abstrakcji.	
+- **cypress/support/api.ts**
+-- API Object Layer. Abstrakcja warstwy komunikacji API. Zawiera metody do wykonywania requestów (np. postNewPost()).	API Object Pattern
+- **cypress/support/commands.ts**
+-- Plik na globalne, niestandardowe komendy Cypress (np. cy.loginAsUser()).	
+- **cypress/support/utils/**
+-- Funkcje pomocnicze, np. do generowania danych testowych (dataUtils.ts).	
+- **cypress/fixtures/**
+-- Dane wejściowe (payloady JSON, dane użytkowników). Używane do parametryzacji testów.	
+- **cypress.config.ts**
+-- Główna konfiguracja Cypress (porty, zmienne środowiskowe, ustawienia raportowania).
+
+##### ▶️ Uruchamianie Testów
+Wszystkie komendy uruchamiania zdefiniowane są w pliku package.json.
+##### Tryb Interaktywny (Open)
+- Uruchamia Cypress Test Runner w trybie graficznym. Idealny do debugowania i tworzenia nowych testów.
+```sh
+npm run cypress:open
+# lub
+yarn cypress:open
+```
+##### Tryb Headless (Run)
+- Uruchamia testy w wierszu poleceń, bez interfejsu graficznego. Standardowy tryb dla potoków CI/CD. Wyniki są zapisywane w folderze cypress/results/.
+```sh
+npm run cypress:run
+# lub
+yarn cypress:run
+```
+##### Selektory Uruchomienia
+Uruchomienie pojedynczego pliku testowego:
+```sh
+npx cypress run --spec "cypress/e2e/posts.spec.ts"
+```
+Uruchomienie testów w konkretnej przeglądarce (np. Edge):
+ź
+##### 📊 Raportowanie (JUnit)
+Projekt jest skonfigurowany do generowania raportów w formacie JUnit XML, co jest standardem dla większości systemów CI/CD (Jenkins, GitLab CI, Azure DevOps).
+###### Lokalizacja Raportów
+- Raporty są zapisywane w katalogu: cypress/results/junit/.
+
+Po zakończeniu przebiegu wszystkie pojedyncze pliki XML są łączone w jeden: cypress/results/junit/merged.xml.
+
+##### Integracja z CI/CD
+- W potoku CI/CD należy skonfigurować krok, który będzie odczytywał plik cypress/results/junit/merged.xml jako źródło wyników testów.
+
+##### 🌐 Praca Zespołowa i Rozwój
+Konwencje Kodowania
+- Styl Kodu: Konfiguracja jest zarządzana przez ESLint i wymusza spójny styl kodu TypeScript.
+- Aliasy Typów: Używaj aliasów typów i interfejsów TypeScript w plikach wsparcia, aby unikać powielania struktur danych.
+
+##### Przestrzeganie Wzorców
+Nowe testy E2E i API muszą przestrzegać zasad Page Object Pattern (dla interfejsu użytkownika) lub API Object Pattern (dla API).
+
+###### Przykład (API Object Pattern)
+
+- Zamiast bezpośredniego wywołania w teście:
+```sh
+// ZŁA PRAKTYKA: brak abstrakcji
+it('tworzy post', () => {
+  cy.request('POST', '/posts', newPostPayload);
+});
+```
+Użyj abstrakcji z cypress/support/api.ts:
+```sh
+// DOBRA PRAKTYKA: użycie warstwy API
+import { api } from '../support/api';
+
+it('tworzy post', () => {
+  api.postNewPost();
+  // Weryfikacja
+});
+```
