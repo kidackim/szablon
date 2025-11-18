@@ -18,3 +18,26 @@ function setAliasCommand<T = unknown>(
 }
 
 Cypress.Commands.add("setAlias", setAliasCommand);
+
+// --- Nowa komenda: getAPIToken ---
+Cypress.Commands.add("getAPIToken", () => {
+    // Komenda wykonuje proces zewnętrzny Java do pobrania tokena
+    return cy.exec("java -jar token-generator/token-generator-0.0.7.jar -f token-generator/generator.properties")
+        .then((result) => {
+            if (result.code !== 0) {
+                console.log("Error while fetching keycloak token: " + result.stderr);
+                // Rzucenie błędu w przypadku niepowodzenia
+                throw new Error("Failed to fetch API token: " + result.stderr);
+            }
+            
+            // Parsowanie tokena z wyjścia stdout
+            let outputLines = result.stdout.split('\n');
+            // Oczekiwany format w stdout to "key=value"
+            let token = outputLines[0].split('=')[1].trim(); 
+            
+            // Zapisanie tokena jako aliasu Cypress
+            cy.wrap(token).as("apiToken");
+            cy.log(`API Token fetched successfully and aliased as @apiToken.`);
+            return token; // Zwraca token, jeśli chcemy go użyć w następnym .then()
+        });
+});
